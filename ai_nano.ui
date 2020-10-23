@@ -92,31 +92,15 @@
            <property name="title">
             <string>2 - Image recording</string>
            </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
-             <widget class="QTableWidget" name="table_recording">
-              <column>
-               <property name="text">
-                <string>Categorie name</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string># of images</string>
-               </property>
-              </column>
-              <column>
-               <property name="text">
-                <string>Press to record</string>
-               </property>
-              </column>
-             </widget>
+             <layout class="QVBoxLayout" name="vl_record"/>
             </item>
            </layout>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="btn_spli_image">
+          <widget class="QPushButton" name="btn_split_image">
            <property name="enabled">
             <bool>false</bool>
            </property>
