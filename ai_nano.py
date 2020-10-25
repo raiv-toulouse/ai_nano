@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
-from PyQt5.QtCore import *
 from PyQt5.uic import loadUi
 import random
+import os
+import pysftp
 from pathlib import Path
 from thread_camera import *
 from record_images import record_images
+from zipfile import ZipFile
 
 #
 # Goal :
@@ -26,6 +28,7 @@ class GUI_ai_nano(QWidget):
         self.sb_camera_id.valueChanged.connect(self.camera_changed)
         self.btn_project_ok.clicked.connect(self.create_project)
         self.btn_split_image.clicked.connect(self.split_images)
+        self.btn_upload_to_dl.clicked.connect(self.upload_to_dl)
 
     def select_ws(self):
         self.ws = Path(QFileDialog.getExistingDirectory(self, "Select Directory"))
@@ -58,8 +61,11 @@ class GUI_ai_nano(QWidget):
             self.vl_record.addWidget(ri)
 
     def split_images(self):
+        # Creation of the labels.txt file
+        labels_file = open(str(self.ws / 'labels.txt'), 'w')
         for cat_dir in (self.ws/'images').iterdir():
             category = cat_dir.name
+            labels_file.write(category+'\n')
             files = [f for f in cat_dir.iterdir()]
             random.shuffle(files)
             ind_80 = int(len(files)*0.8)  # 80 %
@@ -67,14 +73,36 @@ class GUI_ai_nano(QWidget):
             self.split(files[:ind_80],'train',category)
             self.split(files[ind_80:ind_80+ind_10],'val',category)
             self.split(files[ind_80+ind_10:],'test',category)
+        labels_file.close()
+        self.btn_upload_to_dl.setEnabled(True)
+
 
     def split(self,files,dir_name,category):
             path = self.ws/dir_name/category
             for f in files:
                 f.replace(path/f.name)
 
+    def upload_to_dl(self):
+        os.chdir(str(self.ws))  # we work in the ws directory to zip relative (and not absolute) files
+        with ZipFile('data.zip','w') as zip:
+            # writing each file one by one
+            self.zip_files_from_folder('train',zip)
+            self.zip_files_from_folder('val',zip)
+            self.zip_files_from_folder('test',zip)
+            zip.write('labels.txt')  # and finally 'labels.txt'
+        # Now, we can upload the ZIP file to DL machine
+        cnopts = pysftp.CnOpts()  # Suppress autehntication, VERY BAD
+        cnopts.hostkeys = None
+        sftp = pysftp.Connection('10.31.24.205',username='nano',password='nanopwd',cnopts=cnopts)
+        sftp.put('data.zip')
 
+        self.btn_train_model.setEnabled(False)
 
+    def zip_files_from_folder(self,dir,zip):
+        # writing each file one by one
+            for dir in Path(dir).iterdir():
+                for file in dir.iterdir():
+                    zip.write(file)
 #
 # Main program
 #
