@@ -1,0 +1,22 @@
+{
+    "DL_server": {
+        "name": "DL",
+        "ip":  "10.31.24.205",
+        "login": "nano",
+        "pwd": "nanopwd"
+    },
+    "jetson_nano": [
+        {
+            "name": "nano1",
+            "ip": "192.168.1.1",
+            "login": "nano",
+            "pwd": "nanopwd"
+        },
+        {
+            "name": "nano2",
+            "ip": "192.168.1.2",
+            "login": "nano",
+            "pwd": "nanopwd"
+        }
+    ]
+}
