@@ -50,6 +50,9 @@
           </item>
           <item row="0" column="1">
            <widget class="QToolButton" name="btn_working_space">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The Working Space is the directory where all the images from your webcam will be saved in the sub-directory 'images'.&lt;/p&gt;&lt;p&gt;If it is not empty, all its content can be used to train a new model, you don't need to record new images.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>...</string>
             </property>
@@ -57,6 +60,9 @@
           </item>
           <item row="3" column="0" colspan="2">
            <widget class="QPushButton" name="btn_project_ok">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Create the 'train', 'val' and 'test' sub-directories to distribute/split images in.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="text">
              <string>Project OK</string>
             </property>
@@ -64,6 +70,9 @@
           </item>
           <item row="2" column="1">
            <widget class="QSpinBox" name="sb_camera_id">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you have more than one camera, you can select the one you want to work with.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
@@ -74,6 +83,9 @@
           </item>
           <item row="1" column="1">
            <widget class="QSpinBox" name="sb_nb_categories">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Specify the number of categories (number of classes) that you want your model to learn.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
@@ -107,6 +119,9 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Split / distribute randomly the images into the 'train' (80%), 'test' (10%) and 'val' (10%) directories.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="text">
         <string>3-Image spliting in train, val and test folders</string>
        </property>
@@ -116,6 +131,9 @@
       <widget class="QPushButton" name="btn_upload_to_dl">
        <property name="enabled">
         <bool>false</bool>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Upload (with SFTP) the data on the Deep Learning machine which IP address should be specified in the config.json.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string>4 - upload data to DL machine</string>
@@ -127,18 +145,28 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Call remotly on DL machine the 'train.py' script to learn a RESNET-18 model with the images. It uses PyTorch.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="text">
         <string>5 - train model</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="cb_nano_name"/>
+      <widget class="QComboBox" name="cb_nano_name">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select the Jetson Nano board you want to work with. Their IP address must be specified in the config.json file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="btn_convert_onnx">
        <property name="enabled">
         <bool>false</bool>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Convert the model to ONNX format to be used by TensorRT.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string>6 - convert to ONNX model</string>
@@ -150,18 +178,28 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Upload the ONNX model on the selected Jetson Nano board.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
        <property name="text">
         <string>7 - upload model to Jetson Nano</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="cb_select_model"/>
+      <widget class="QComboBox" name="cb_select_model">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If the Working Space is not empty, you can select the model you want to work with. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="btn_inference">
        <property name="enabled">
         <bool>false</bool>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Start the my-imagenet.py script on Jetson Nano board to make prediction (inference) on the image acquired by the Nano's webcam.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string>8 - inference with nano</string>
