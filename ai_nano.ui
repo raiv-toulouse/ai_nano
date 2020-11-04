@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>934</width>
-    <height>678</height>
+    <width>974</width>
+    <height>739</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -133,25 +133,38 @@
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="sb_id_nano">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-       </property>
-       <property name="prefix">
-        <string>jetson nano </string>
-       </property>
-      </widget>
+      <widget class="QComboBox" name="cb_nano_name"/>
      </item>
      <item>
-      <widget class="QPushButton" name="tbn_upload_to_nano">
+      <widget class="QPushButton" name="btn_convert_onnx">
        <property name="enabled">
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>6 - upload model to Jetson Nano</string>
+        <string>6 - convert to ONNX model</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_upload_to_nano">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>7 - upload model to Jetson Nano</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cb_select_model"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_inference">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>8 - inference with nano</string>
        </property>
       </widget>
      </item>
@@ -163,8 +176,8 @@
       <widget class="QLabel" name="lbl_image">
        <property name="minimumSize">
         <size>
-         <width>600</width>
-         <height>400</height>
+         <width>640</width>
+         <height>480</height>
         </size>
        </property>
        <property name="text">
@@ -173,7 +186,13 @@
       </widget>
      </item>
      <item>
-      <widget class="QPlainTextEdit" name="plainTextEdit"/>
+      <widget class="QPlainTextEdit" name="txt_log">
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+        </font>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

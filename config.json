@@ -8,15 +8,15 @@
     "jetson_nano": [
         {
             "name": "nano1",
-            "ip": "192.168.1.1",
+            "ip": "192.168.1.18",
             "login": "nano",
-            "pwd": "nanopwd"
+            "pwd": "nano"
         },
         {
             "name": "nano2",
             "ip": "192.168.1.2",
             "login": "nano",
-            "pwd": "nanopwd"
+            "pwd": "nano"
         }
     ]
 }

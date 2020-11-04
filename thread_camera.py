@@ -33,7 +33,7 @@ class Thread_Camera(QThread):
 
     def run(self):
         """
-        Méthode principale du thread. Traite chaque image issue de la source d'images pour y cherche la présence d'un oeil.
+        Méthode principale du thread.
         """
         while True:
             ret, img = self.sourceVideo.read()
