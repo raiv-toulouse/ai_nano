@@ -154,13 +154,6 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="cb_nano_name">
-       <property name="toolTip">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select the Jetson Nano board you want to work with. Their IP address must be specified in the config.json file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QPushButton" name="btn_convert_onnx">
        <property name="enabled">
         <bool>false</bool>
@@ -170,6 +163,13 @@
        </property>
        <property name="text">
         <string>6 - convert to ONNX model</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="cb_nano_name">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Select the Jetson Nano board you want to work with. Their IP address must be specified in the config.json file.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>

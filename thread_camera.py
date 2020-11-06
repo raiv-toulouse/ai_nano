@@ -7,7 +7,7 @@ from time import sleep
 
 class Thread_Camera(QThread):
 
-    # Signaux de communication avec l'IHM (voir classe DialogChercheOeil)
+    # Signaux de communication avec l'IHM
     signalAfficherImage = pyqtSignal(ndarray) # Pour afficher une image dans le QLabel nommé video_frame
 
     def __init__(self, parent=None):
