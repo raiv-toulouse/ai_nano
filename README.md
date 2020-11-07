@@ -64,6 +64,15 @@ Run the classification of acquired images from the Nano's camera. The first time
 You'll see the classification results in the log display.
 
 ![result](doc/result.png)
+
+On the Jetson Nano, there's a LED per class. When a class is recognized, its LED brights
+
+Here's the correspondance : 
+* class 0 => pin 12
+* class 1 => pin 16
+* class 2 => pin 18
+
+![result](doc/led_gpio.jpeg)
 ##Other workflows
 If you select a non empty working space directory, you can directly access to the step 4 (no image recording needed).
 
