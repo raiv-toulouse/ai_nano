@@ -27,11 +27,18 @@ import jetson.utils
 
 import argparse
 import sys
+import RPi.GPIO as GPIO
 import time
 
 # To run this program, assuming that your model is in the /home/nano/models/i375x1kh directory
 #
 # ./my-imagenet.py --log-level=silent --headless --camera=/dev/video0  --model=/home/nano/models/i375x1kh/resnet18.onnx --input_blob=input_0 --output_blob=output_0 --labels=/home/nano/models/i375x1kh/labels.txt
+
+# Pin Definitions
+class_0_pin = 12  # BCM pin 18, BOARD pin 12
+class_1_pin = 16  
+class_2_pin = 18  
+
 
 # parse the command line
 parser = argparse.ArgumentParser(description="Classify a live camera stream using an image recognition DNN.", 
@@ -61,22 +68,36 @@ net = jetson.inference.imageNet(opt.network, sys.argv)
 input = jetson.utils.videoSource(opt.input_URI, argv=sys.argv)
 output = jetson.utils.videoOutput(opt.output_URI, argv=sys.argv+is_headless)
 
-# process frames until the user exits
-while True:
-	# capture the next image
-	img = input.Capture()
+# Pin Setup:
+GPIO.setmode(GPIO.BOARD)  # BCM pin-numbering scheme from Raspberry Pi
+# set pin as an output pin with optional initial state of HIGH
+GPIO.setup(class_0_pin, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(class_1_pin, GPIO.OUT, initial=GPIO.LOW)
+GPIO.setup(class_2_pin, GPIO.OUT, initial=GPIO.LOW)
 
-	# classify the image
-	class_id, confidence = net.Classify(img)
+try:
+	# process frames until the user exits
+	while True:
+		# capture the next image
+		img = input.Capture()
 
-	# find the object description
-	class_desc = net.GetClassDesc(class_id)
+		# classify the image
+		class_id, confidence = net.Classify(img)
 
-	# print out the result
-	print("image is recognized as '{:s}' (class #{:d}) with {:f}% confidence".format(class_desc, class_id, confidence * 100))
+		# Switch on/off the LEDs
+		GPIO.output(class_0_pin, class_id==0)
+		GPIO.output(class_1_pin, class_id==1)
+		GPIO.output(class_2_pin, class_id==2)
 
-	time.sleep(1)  # One inference per second
+		# find the object description
+		class_desc = net.GetClassDesc(class_id)
 
+		# print out the result
+		print("image is recognized as '{:s}' (class #{:d}) with {:f}% confidence".format(class_desc, class_id, confidence * 100))
+
+		time.sleep(1)  # One inference per second
+finally:
+	GPIO.cleanup()
 	
 
 

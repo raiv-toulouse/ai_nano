@@ -221,6 +221,15 @@ class GUI_ai_nano(QWidget):
     def update_log(self, txt):
         self.txt_log.appendPlainText(txt)
 
+    def closeEvent(self, event):
+        nano_computer = self.nano_computers[self.cb_nano_name.currentIndex()]
+        cmd = 'cd jetson-inference/python/examples; ./switch_off_led.py'
+        client = paramiko.SSHClient()
+        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        client.connect(nano_computer.ip, username=nano_computer.login, password=nano_computer.pwd)
+        stdin, stdout, stderr = client.exec_command(cmd, get_pty=True)
+        time.sleep(1)
+        event.accept() # let the window close
 
 #
 # Main program
